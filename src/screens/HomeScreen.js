@@ -4,9 +4,10 @@ import AppContext from '../../store/AppContext'
 import BG from '../components/bg/BG'
 import TextComp from '../components/textComp/TextComp'
 import Colors from '../utils/Colors'
+import screenNames from '../utils/screenNames'
 import strings from '../utils/strings'
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
     const {getDirections} = useContext(AppContext);
 
     const params = {
@@ -18,7 +19,8 @@ const HomeScreen = () => {
             style:styles.btn
         },
         articles:{
-            style:[styles.btn,{backgroundColor:Colors.popularColor}]
+            style:[styles.btn,{backgroundColor:Colors.popularColor}],
+            onPress:()=>navigation.navigate(screenNames.Categories)
         }
     }
     return (
