@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import Colors from '../../utils/Colors';
+import sizes from '../../utils/sizes';
 
 const CategoryBox = props => {
   const {category, onPress} = props;
@@ -23,8 +24,8 @@ export default CategoryBox;
 
 const styles = StyleSheet.create({
   category: {
-    width: '30%',
-    height: 100,
+    width:sizes.PageWidth * 0.4,
+    height: 150,
     backgroundColor: Colors.categoryBackground,
     margin: 10,
     elevation: 11,

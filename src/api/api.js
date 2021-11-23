@@ -5,8 +5,8 @@ export const getAllArticles = async () => {
     return fetchApi(urls.getAllArticles, 'GET');
   };
 
-  export const getArticlesByCategory = async (title) => {
-    return fetchApi(urls.getArticlesByCategory(title), 'GET');
+  export const getArticlesByCategory = async (category) => {
+    return fetchApi(urls.getArticlesByCategory(category), 'GET');
   };
 
 

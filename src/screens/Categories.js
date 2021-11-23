@@ -14,7 +14,7 @@ const onCategoryPress=(categoryName)=>{
 }
 
   const renderCategories = (arr = []) => {
-    return arr?.map(category => <CategoryBox key={category.id} onPress={()=>onCategoryPress(category.title)} category={category} />);
+    return arr?.map(category => <CategoryBox key={category.id} onPress={()=>onCategoryPress(category.title.toLowerCase())} category={category} />);
   };
 
   return (

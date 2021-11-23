@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Alert, StyleSheet, Text, View } from 'react-native'
 import BG from '../components/bg/BG';
+import WebViewBox from '../components/webview/WebViewBox';
 
 const ArticleData = ({ route, navigation }) => {
+
+    const {url} = route.params
 
     const params ={
         bg:{
@@ -13,7 +16,7 @@ const ArticleData = ({ route, navigation }) => {
  
     return (
         <BG {...params.bg}>
-            <Text></Text>
+            <WebViewBox url={url} style={styles.webview} />
         </BG>
     )
 }
@@ -22,6 +25,14 @@ export default ArticleData
 
 const styles = StyleSheet.create({
     container:{
-        flex:1
+        flex:1,
+        // justifyContent:"center", 
+        // alignItems:"center"
+    },
+    text:{
+        color:"black"
+    },
+    webview:{
+        height:400
     },
 })

@@ -30,7 +30,7 @@ const screenParams = {
     ArticleData: {
       name: screenNames.ArticleData,
       component: ArticleData,
-      options: { headerShown: true, title:"Article data" },
+      options: { headerShown: false},
     },
     ArticlesList: {
       name: screenNames.ArticlesList,
