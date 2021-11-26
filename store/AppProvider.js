@@ -13,7 +13,8 @@ const locale =
     const initUser = {
       language:locale,
       token:undefined,
-      userName:undefined
+      isLogged:false,
+      userName:"Guest"
     }
 
 
@@ -22,10 +23,31 @@ export const AppProvider = props => {
   const [favoriteList, setFavoriteList] = useState([]);
 
   const addActicleToFavorites = article => {
-    setFavoriteList({...favoriteList, article});
+    console.log('adding article');
+    setFavoriteList([...favoriteList, article]);
   };
 
-  
+  const isArticleInFavoriteList =(title)=>{
+    let isInList = favoriteList.find((article)=> article.title === title)
+    return isInList !== undefined
+  }
+  const removeArticleFromList = (title) =>{
+    let newList = favoriteList.filter((article)=> article.title !== title)
+    setFavoriteList(newList)
+  }
+const updateUserLogStatus=(user)=>{
+  console.log('user name', user?.name);
+  setUserData({...userData, isLogged:true, userName:user?.name})
+}  
+const signOutUser=()=>{
+  setUserData({...userData, isLogged:false, userName:"Guest"})
+
+}
+const updateUserDetails = (val) => {
+  let newUser = { ...userData, ...val };
+  AsyncStorage.setItem("USER", JSON.stringify(newUser));
+  setUserData(newUser);
+};
   return (
     <AppContext.Provider
       value={{
@@ -34,6 +56,12 @@ export const AppProvider = props => {
         isRTL:locale === 'he' || locale === 'he-IL',
         favoriteList: favoriteList,
         addActicleToFavorites: addActicleToFavorites,
+        isArticleInFavoriteList:isArticleInFavoriteList,
+        removeArticleFromList:removeArticleFromList,
+        updateUserLogStatus:updateUserLogStatus,
+        signOutUser:signOutUser,
+        isLogged:userData.isLogged,
+        updateUserDetails:updateUserDetails,
       }}>
       {props.children}
     </AppContext.Provider>

@@ -1,20 +1,25 @@
-import React, {useEffect, useState} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {Alert, Button, StyleSheet, Text, View} from 'react-native';
 import {
   GoogleSignin,
   GoogleSigninButton,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+import {AppProvider} from '../../../store/AppProvider';
 
-const GoogleSignIn = () => {
+const GoogleSignIn = props => {
+  const {afterUserIsLogged} = props;
   const [isSigninInProgress, setIsSigninInProgress] = useState(false);
   const [userInfo, setUserInfo] = useState();
+
   const signIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      setUserInfo({userInfo});
-      console.log('userInfo', userInfo);
+      if (userInfo) {
+          console.log('user info:', userInfo);
+          afterUserIsLogged(userInfo?.user);
+      }
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         console.log('error', error);
@@ -29,43 +34,34 @@ const GoogleSignIn = () => {
         // play services not available or outdated
       } else {
         console.log('error', error);
-
+        Alert.alert('oops... something went wrong');
         // some other error happened
       }
     }
   };
 
-  const onInit = () => {
-    GoogleSignin.configure();
-  };
-
-  const revokeAccess = async () => {
-    try {
-      await GoogleSignin.revokeAccess();
-      // Google Account disconnected from your app.
-      // Perform clean-up actions, such as deleting data associated with the disconnected account.
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    onInit();
-  }, []);
   return (
-    <View>
+    <View style={styles.container}>
       <GoogleSigninButton
-        style={{width: 192, height: 48}}
+        style={styles.google}
         size={GoogleSigninButton.Size.Wide}
         color={GoogleSigninButton.Color.Dark}
         onPress={signIn}
         disabled={isSigninInProgress}
       />
-      <Button title="diconnect" onPress={revokeAccess} />
     </View>
   );
 };
 
 export default GoogleSignIn;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+  },
+  google: {
+    width: 192,
+    height: 58,
+    marginVertical: 20,
+  },
+});

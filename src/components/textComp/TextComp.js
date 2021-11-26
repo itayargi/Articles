@@ -24,6 +24,7 @@ export default TextComp;
 const styles = StyleSheet.create({
   text: {
     fontSize: 16,
-    color: '#042464',
+    // color: '#042464',
+    color:"black"
   },
 });

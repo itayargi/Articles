@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {ImageBackground, StyleSheet, Text, View} from 'react-native';
+import AppContext from '../../../store/AppContext';
+import SignOut from '../google/SignOut';
 import TextComp from '../textComp/TextComp';
 
 const BG = props => {
-  const {source, style, title} = props;
+  const {isLogged} = useContext(AppContext)
+  const {source, style, title, signOut} = props;
   const params = {
     background: {
       source: source,
@@ -13,6 +16,7 @@ const BG = props => {
   return (
     <ImageBackground {...params.background}>
         {title && <TextComp style={styles.title}>{title}</TextComp>}
+      {signOut && isLogged && <SignOut style={styles.signOut} disabled={!isLogged} />}
       <View style={style}>{props.children}</View>
     </ImageBackground>
   );
@@ -28,7 +32,12 @@ const styles = StyleSheet.create({
   title:{
     textAlign:"center",
     fontSize:24,
-    paddingTop:20
+    paddingTop:20,
+    color:"black"
     // marginTop:20
+  },
+  signOut:{
+    alignSelf:"flex-end", 
+    margin:10
   },
 });

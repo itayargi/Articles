@@ -7,11 +7,11 @@ const Card = props => {
   const {article , onPress} = props;
   const backUpImage =
     'https://cdn.pixabay.com/photo/2014/03/24/17/21/newspaper-295480__340.png';
-  const onLinkPress = url => {
-    onPress(url)
+  const onLinkPress = data => {
+    onPress(data)
   };
   return (
-    <TouchableOpacity style={styles.container} onPress={() => onLinkPress(article.url)}>
+    <TouchableOpacity style={styles.container} onPress={() => onLinkPress(article)}>
       <ImageBackground
         resizeMode={'contain'}
         source={{uri: article.image || backUpImage}}

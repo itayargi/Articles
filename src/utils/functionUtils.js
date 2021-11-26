@@ -6,6 +6,10 @@ export const findDirectionToLanguage = (lang) => {
       return {flexDirection: 'row', align: 'left', alignSelf: 'flex-start', };
   };
 
- 
+export const wait = (timeout) => {
+    return new Promise((resolve) => {
+      setTimeout(resolve, timeout);
+    });
+  };
 
 
