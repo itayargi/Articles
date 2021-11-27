@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
 import {getArticlesByCategory} from '../api/api';
 import BG from '../components/bg/BG';
 import Loader from '../components/Loader/Loader';
@@ -30,7 +30,7 @@ const ArticlesList = ({route, navigation}) => {
       .then(resJson => {
         resJson?.data && setArticles(resJson.data);
         setIsLoading(false);
-      });
+      }).catch((error)=>Alert.alert(error?.message?.toString()))
   };
 
   const onRefresh = () => {

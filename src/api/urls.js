@@ -1,7 +1,7 @@
-const domain = 'http://api.mediastack.com/v1/';
-const token = "56e937a2313d08f7dca20e4cb4c89eb9"
+import { Alert } from 'react-native';
+import {TOKEN, DOMAIN} from '@env';
+
 
 export default {
-    getAllArticles: domain + `news?access_key=${token}`,
-    getArticlesByCategory:(categoryName)=> domain + `news?access_key=${token}&categories=${categoryName}&languages=en`
+    getArticlesByCategory:(categoryName)=> DOMAIN + `news?access_key=${TOKEN}&categories=${categoryName}&languages=en&offset=0`
 }

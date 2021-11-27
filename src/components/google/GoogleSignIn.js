@@ -6,6 +6,7 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import {AppProvider} from '../../../store/AppProvider';
+import auth from '@react-native-firebase/auth';
 
 const GoogleSignIn = props => {
   const {afterUserIsLogged} = props;
@@ -17,7 +18,14 @@ const GoogleSignIn = props => {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       if (userInfo) {
+        const {accessToken,idToken} = userInfo
+        const credential = auth.GoogleAuthProvider.credential(
+          idToken,
+          accessToken,
+        );
+        await auth().signInWithCredential(credential);
           console.log('user info:', userInfo);
+          // console.log('user credential:', credential);
           afterUserIsLogged(userInfo?.user);
       }
     } catch (error) {
@@ -34,7 +42,7 @@ const GoogleSignIn = props => {
         // play services not available or outdated
       } else {
         console.log('error', error);
-        Alert.alert('oops... something went wrong');
+        Alert.alert(error.message.toString());
         // some other error happened
       }
     }

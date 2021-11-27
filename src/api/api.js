@@ -1,9 +1,6 @@
 import urls from "./urls";
 
 
-export const getAllArticles = async () => {
-    return fetchApi(urls.getAllArticles, 'GET');
-  };
 
   export const getArticlesByCategory = async (category) => {
     return fetchApi(urls.getArticlesByCategory(category), 'GET');
@@ -17,7 +14,7 @@ export const getAllArticles = async () => {
       headers: {
         'Content-Type': 'application/json',
         'Connection': 'keep-alive',
-        'Cache-Control': 'no-cache'
+        // 'Cache-Control': 'no-cache'
       },
     };
   
