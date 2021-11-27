@@ -24,7 +24,6 @@ const GoogleSignIn = props => {
           accessToken,
         );
         await auth().signInWithCredential(credential);
-          console.log('user info:', userInfo);
           // console.log('user credential:', credential);
           afterUserIsLogged(userInfo?.user);
       }

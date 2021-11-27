@@ -14,7 +14,8 @@ const locale =
       language:locale,
       token:undefined,
       isLogged:false,
-      userName:"Guest"
+      userName:"Guest",
+      favoriteList:[]
     }
 
 
@@ -23,7 +24,8 @@ export const AppProvider = props => {
   const [favoriteList, setFavoriteList] = useState([]);
 
   const addActicleToFavorites = article => {
-    console.log('adding article');
+    let newUser = {...userData,favoriteList:[...userData.favoriteList,article]}
+    saveUserInStorage(newUser)
     setFavoriteList([...favoriteList, article]);
   };
 
@@ -33,14 +35,26 @@ export const AppProvider = props => {
   }
   const removeArticleFromList = (title) =>{
     let newList = favoriteList.filter((article)=> article.title !== title)
+    let newUser = {...userData,favoriteList:newList}
+    saveUserInStorage(newUser)
     setFavoriteList(newList)
   }
-const updateUserLogStatus=(user)=>{
-  console.log('user name', user?.name);
-  setUserData({...userData, isLogged:true, userName:user?.name})
+const updateUserLogStatus=(googleUser)=>{
+  setUserData({...userData, isLogged:true, userName:googleUser?.name})
 }  
+const updateUserState = (val) => {
+  let newUser = { ...userData, ...val };
+  console.log('new user', newUser);
+  setUserData(newUser);
+  setFavoriteList(newUser.favoriteList)
+};
+const saveUserInStorage = (newUser)=>{
+  AsyncStorage.setItem("USER", JSON.stringify(newUser));
+}
 const signOutUser=()=>{
-  setUserData({...userData, isLogged:false, userName:"Guest"})
+  let newUser = {...userData, isLogged:false, userName:"Guest"}
+  saveUserInStorage(newUser)
+  setUserData(newUser)
 
 }
 const updateUserDetails = (val) => {
@@ -62,6 +76,7 @@ const updateUserDetails = (val) => {
         signOutUser:signOutUser,
         isLogged:userData.isLogged,
         updateUserDetails:updateUserDetails,
+        updateUserState:updateUserState
       }}>
       {props.children}
     </AppContext.Provider>

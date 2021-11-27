@@ -1,7 +1,9 @@
 import React ,{useContext} from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
 import AppContext from '../../../store/AppContext'
+import Colors from '../../utils/Colors'
 import strings from '../../utils/strings'
+import TextComp from '../textComp/TextComp'
 import GoogleSignIn from './GoogleSignIn'
 
 const LoggingScreen = () => {
@@ -13,9 +15,9 @@ const LoggingScreen = () => {
 
     return (
         <View>
-            <Text style={styles.modalHeader}>
+            <TextComp style={styles.modalHeader}>
           {strings.modal_header}
-        </Text>
+        </TextComp>
         <GoogleSignIn afterUserIsLogged={afterUserIsLogged} />
         </View>
     )
@@ -25,9 +27,10 @@ export default LoggingScreen
 
 const styles = StyleSheet.create({
     modalHeader:{
-        color: 'black', 
+        color:Colors.fontColor, 
         textAlign: 'center',
         fontSize:19,
-        marginTop:20
+        marginTop:20,
+        paddingHorizontal:15
       },
 })

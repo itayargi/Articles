@@ -1,5 +1,6 @@
 import React from "react";
 import { Modal, StyleSheet, View, Animated, TouchableOpacity, Text } from "react-native";
+import Colors from "../../utils/Colors";
 
 const AppModal = (props) => {
   const { modalVisible, leftBtn, rightBtn, close, style } = props;
@@ -17,7 +18,7 @@ const AppModal = (props) => {
         <Animated.View style={[styles.innerContainer,style]}>
           {props.children}
           {leftBtn && rightBtn && <View style={styles.btnRow}>
-            <TouchableOpacity onPress={leftBtn.onPress}><Text style={styles.btnText}>{leftBtn.text}</Text></TouchableOpacity>
+            <TouchableOpacity onPress={leftBtn.onPress}><Text style={[styles.btnText,{color:Colors.colordarkCoral}]}>{leftBtn.text}</Text></TouchableOpacity>
             <TouchableOpacity onPress={rightBtn.onPress}><Text style={styles.btnText}>{rightBtn.text}</Text></TouchableOpacity>
           </View> }
         </Animated.View>
@@ -43,7 +44,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   btnRow:{
-    flexDirection:'row',  justifyContent:"space-around"
+    flexDirection:'row',  
+    justifyContent:"space-around",
+    marginTop:20
   },
   btnText:{
 color:"blue",

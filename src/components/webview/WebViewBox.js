@@ -1,38 +1,35 @@
 import {useNavigation} from '@react-navigation/core';
 import React, {useEffect, useState} from 'react';
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {
+  Button,
+  StyleSheet,
+  View,
+} from 'react-native';
 import {WebView} from 'react-native-webview';
 import strings from '../../utils/strings';
-import Loader from '../Loader/Loader';
+import BackBtn from '../backBtn/BackBtn';
+
 const WebViewBox = props => {
   const navigation = useNavigation();
-  const demoUrl =
-    'https://seekingalpha.com/news/3723980-blackrock-muniyield-new-jersey-fund-declares-missing-dividend?utm_source=feed_news_all&utm_medium=referral';
   const {url, style, onPress, isArticleOnList} = props;
   const btnTextByProp = isArticleOnList
     ? strings.removeFromFavorites
     : strings.addToFavorites;
   const [btnText, setBtnText] = useState(btnTextByProp);
-  const [isLoading, setIsLoading] = useState();
   const btnStyle = isArticleOnList ? styles.red : styles.blue;
-  const handleBack = () => {
-    navigation.goBack();
-  };
-const updateLoadingState= (syntheticEvent)=>{
-    const { nativeEvent } = syntheticEvent;
-    setIsLoading(nativeEvent.loading)
-}
-  
+ 
+ 
+
   useEffect(() => {
     setBtnText(btnTextByProp);
   }, [isArticleOnList]);
   return (
     <View style={styles.container}>
       <View style={styles.row}>
+        <BackBtn />
         <Button style={btnStyle} title={btnText} onPress={onPress} />
-        <Button title={'back'} onPress={handleBack} />
       </View>
-      <WebView style={style} source={{uri: url}}    />
+      <WebView style={style} source={{uri: url}} />
     </View>
   );
 };

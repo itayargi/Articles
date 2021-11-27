@@ -1,5 +1,6 @@
 import React from 'react';
 import {ImageBackground, StyleSheet, Text, View, Linking, TouchableOpacity} from 'react-native';
+import Colors from '../../utils/Colors';
 import sizes from '../../utils/sizes';
 import strings from '../../utils/strings';
 
@@ -47,7 +48,8 @@ const styles = StyleSheet.create({
       color:"black"
   },
   text:{
-    color:"black"
+    color:Colors.colorBlueberry,
+    textDecorationLine:"underline"
 
   },
 });

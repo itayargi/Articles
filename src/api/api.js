@@ -17,7 +17,6 @@ import urls from "./urls";
         // 'Cache-Control': 'no-cache'
       },
     };
-  
     if (body) {
       params.body = JSON.stringify(body);
       console.log('body: ', params.body);
@@ -25,7 +24,6 @@ import urls from "./urls";
     if (method) {
       params.method = method;
     }
-  
     return await fetch(url, params);
   };
   

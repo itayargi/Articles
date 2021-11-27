@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
 import {getArticlesByCategory} from '../api/api';
+import BackBtn from '../components/backBtn/BackBtn';
 import BG from '../components/bg/BG';
 import Loader from '../components/Loader/Loader';
 import RenderArticles from '../components/renderArticles/RenderArticles';
@@ -20,6 +21,7 @@ const ArticlesList = ({route, navigation}) => {
       articles: articles,
       refreshing: refreshing,
       onRefresh: () => onRefresh(),
+      // ListHeaderComponent:<BackBtn />
     },
   };
 
@@ -36,6 +38,7 @@ const ArticlesList = ({route, navigation}) => {
   const onRefresh = () => {
     fetchArticles();
   };
+
   useEffect(() => {
     title && fetchArticles();
   }, []);
@@ -43,6 +46,7 @@ const ArticlesList = ({route, navigation}) => {
   if(isLoading) return <Loader />
   return (
     <BG {...params.bg}>
+      <BackBtn style={styles.back} />
       <RenderArticles {...params.render} />
     </BG>
   );
@@ -53,7 +57,10 @@ export default ArticlesList;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
   },
-  list: {},
+  back: {
+    margin:10,
+    position:"absolute",
+    zIndex:1,
+  },
 });

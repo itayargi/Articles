@@ -10,5 +10,6 @@ export default {
   colorCloud:"grey",
   colordarkCoral:"red",
   colorBlueberry: "#393777",
+  colorBlueLight: "#0082f2",
 
 };

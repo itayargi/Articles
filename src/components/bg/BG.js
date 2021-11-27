@@ -31,10 +31,9 @@ const styles = StyleSheet.create({
   },
   title:{
     textAlign:"center",
-    fontSize:24,
+    fontSize:30,
     paddingTop:20,
     color:"black"
-    // marginTop:20
   },
   signOut:{
     alignSelf:"flex-end", 
