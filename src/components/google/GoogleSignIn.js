@@ -24,7 +24,6 @@ const GoogleSignIn = props => {
           accessToken,
         );
         await auth().signInWithCredential(credential);
-          // console.log('user credential:', credential);
           afterUserIsLogged(userInfo?.user);
       }
     } catch (error) {
@@ -33,11 +32,9 @@ const GoogleSignIn = props => {
         // user cancelled the login flow
       } else if (error.code === statusCodes.IN_PROGRESS) {
         console.log('error', error);
-
         // operation (e.g. sign in) is in progress already
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
         console.log('error', error);
-
         // play services not available or outdated
       } else {
         console.log('error', error);

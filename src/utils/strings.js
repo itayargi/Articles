@@ -17,5 +17,7 @@ export default {
     favoritesEmpty:"Your list is empty... to add an acticle go to category section",
     logOut:"Disconnect",
     dashboardHeader:"Dashboard data:",
-    dashboard_favorite_title:"Sum of favorite articles"
+    dashboard_favorite_title:"Sum of favorite articles",
+    toast_deleteArticle:"You Article has been removed",
+    toast_addArticle:"You Article has been added",
 }

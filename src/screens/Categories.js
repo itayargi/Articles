@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import CategoryBox from '../components/categoryBox/CategoryBox';
 import categoriesList from '../data/categoriesList';
 import screenNames from '../utils/screenNames';
@@ -19,7 +19,7 @@ const onCategoryPress=(categoryName)=>{
 
   return (
     <View style={styles.container}>
-      <View style={styles.categories}>{renderCategories(categoriesList)}</View>
+      <ScrollView contentContainerStyle={styles.categories}>{renderCategories(categoriesList)}</ScrollView>
     </View>
   );
 };
@@ -29,7 +29,7 @@ export default Categories;
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        justifyContent:"center"
+        justifyContent:"center",
     },
     categories:{
         flexDirection:"row",

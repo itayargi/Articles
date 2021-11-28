@@ -24,11 +24,7 @@ const screenParams = {
     component: ArticleData,
     options: {headerShown: false},
   },
-  FavoriteList: {
-    name: screenNames.FavoriteList,
-    component: FavoriteList,
-    options: {headerShown: true, title: ''},
-  },
+  
   Splash: {
     name: screenNames.Splash,
     component: Splash,
@@ -42,7 +38,6 @@ const Navigator = props => {
       <Stack.Navigator {...screenParams.navigator}>
         <Stack.Screen {...screenParams.HomeScreen} />
         <Stack.Screen {...screenParams.ArticleData} /> 
-        <Stack.Screen {...screenParams.FavoriteList} />
         <Stack.Screen {...screenParams.Splash} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -21,7 +21,6 @@ const ArticlesList = ({route, navigation}) => {
       articles: articles,
       refreshing: refreshing,
       onRefresh: () => onRefresh(),
-      // ListHeaderComponent:<BackBtn />
     },
   };
 

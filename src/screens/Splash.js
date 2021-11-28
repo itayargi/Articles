@@ -6,6 +6,7 @@ import { wait } from '../utils/functionUtils'
 import screenNames from '../utils/screenNames'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AppContext from '../../store/AppContext'
+import { CommonActions } from '@react-navigation/native';
 
 const Splash = ({navigation}) => {
   const {updateUserState} = useContext(AppContext)
@@ -16,11 +17,19 @@ const Splash = ({navigation}) => {
          },
     }
 const navigateToHomeScreen=()=>{
-    navigation.navigate(screenNames.TabsNavigation)
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [
+            { name: screenNames.TabsNavigation },
+           
+          ],
+        })
+      );
 }
 
 const updateUserStateAndNavigate = async(userFromStorage)=>{
-  updateUserState(userFromStorage)
+ await updateUserState(userFromStorage)
   navigateToHomeScreen()
 }
     const getDataFromStorage = async () => {
@@ -29,7 +38,7 @@ const updateUserStateAndNavigate = async(userFromStorage)=>{
             if (res) {
               return JSON.parse(res);
             } else {
-              console.log('wow no user in storage');
+              console.log('no user in storage');
               wait(2000).then(() => navigateToHomeScreen())
             }
           })
@@ -40,7 +49,6 @@ const updateUserStateAndNavigate = async(userFromStorage)=>{
   
     useEffect(() => {
         getDataFromStorage() 
-       
     }, [])
     return (
         <ImageBackground {...params.background} >

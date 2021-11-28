@@ -52,6 +52,7 @@ function CategoryStack() {
 const TabsNavigation = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
   const {userData, updateUserLogStatus, isLogged} = useContext(AppContext);
+  let isMounted = true
 
   const params = {
     tabContainer: {
@@ -130,25 +131,28 @@ const TabsNavigation = ({navigation}) => {
   };
 
   const onInit = async () => {
-    setIsLoading(true);
+    isMounted && setIsLoading(true);
     GoogleSignin.configure({
       webClientId:
         '34248800950-v3ihfjv6j6hpsr9uoferaka12jissfhh.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
       offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
     });
     const isSignedIn = await GoogleSignin.isSignedIn();
-    if (isSignedIn) {
+    if (isSignedIn && isMounted) {
       const currentUser = await GoogleSignin.getCurrentUser();
       updateUserLogStatus(currentUser.user);
-      setIsLoading(false);
+       setIsLoading(false);
     } else {
-      setIsLoading(false);
+      isMounted && setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    onInit();
-    checkInternetConnection()
+    if (isMounted){
+      onInit();
+      checkInternetConnection()
+    }
+    return () => { isMounted = false }
   }, []);
 
   return (

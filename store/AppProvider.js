@@ -3,7 +3,6 @@ import AppContext from './AppContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NativeModules, Platform } from 'react-native';
 import {findDirectionToLanguage} from '../src/utils/functionUtils'
-
 const locale =
   Platform.OS === 'ios'
     ? NativeModules.SettingsManager.settings.AppleLocale ||
